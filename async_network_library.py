@@ -35,7 +35,7 @@ class async_ssh_library:
                 try:
                     return_str += await asyncio.wait_for(self.process.stdout.read(8192), 2);
                 except asyncio.exceptions.TimeoutError:
-                    raise Exception(f"Command \"{command.split(':')[0].strip()}\" is not finished yet.");
+                    pass;
                 for prompt in self.sequence_of_default_prompts:
                     if prompt in return_str.split("\n")[-1]:
                         return return_str;
@@ -48,7 +48,7 @@ class async_ssh_library:
                 try:
                     return_str += await asyncio.wait_for(self.process.stdout.read(8192), 2);
                 except asyncio.exceptions.TimeoutError:
-                    raise Exception(f"Command \"{command.split(':')[0].strip()}\" is not finished yet.");
+                    pass;
                 if command.split(":")[1].strip() in return_str.split("\n")[-1]:
                     self.sequence_of_default_prompts.add(return_str.split("\n")[-1]);
                     return return_str;
